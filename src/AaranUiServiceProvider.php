@@ -1,6 +1,6 @@
 <?php
 
-namespace Codexsun\AaranUi;
+namespace Aaran\AaranUi;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Compilers\BladeCompiler;
