@@ -1,10 +1,10 @@
 <?php
 
-namespace Codexsun\aaranUI;
+namespace Codexsun\AaranUI;
 
 use Illuminate\Support\Facades\Blade;
-use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Compilers\BladeCompiler;
 
 class AaranUIServiceProvider extends ServiceProvider
 {
@@ -16,7 +16,7 @@ class AaranUIServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'aaranUI');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'aaranUI');
 
         $this->configureComponents();
 
@@ -26,13 +26,27 @@ class AaranUIServiceProvider extends ServiceProvider
     {
         $this->callAfterResolving(BladeCompiler::class, function () {
 
-//            $this->registerComponent('alerts.flash');
+            $this->registerComponent('alerts.notification');
+
+            $this->registerComponent('assets.logo.cx-logo');
+
+            $this->registerInput();
 
         });
     }
 
+
+    #region[Input]
+    protected function registerInput(): void
+    {
+        $this->registerComponent('input.text');
+    }
+    #endregion[Input]
+
+    #region[RegisterComponent]
     protected function registerComponent($component)
     {
-        Blade::component('aaranUI::components.'.$component, 'aaran-'.$component);
+        Blade::component('aaranUI::components.' . $component, 'aaran-' . $component);
     }
+    #endregion
 }
